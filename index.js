@@ -1,1 +1,1 @@
-module.Profiler = require('./profiler');
+exports.Profiler = require('./profiler');
