@@ -9,12 +9,14 @@ class Profiler extends Events {
     constructor() {
         super();
         this.ready = false;
-		this.lastChunkId = 0;
-        session.post('Profiler.enable', () => {
+	}
+	
+	init() {
+		session.post('Profiler.enable', () => {
             this.emit('ready', true);
             this.ready = true;
         });
-    }
+	}
 
 	sampleCPU(time_seconds=30) {
         return new Promise((resolve, reject) => {
@@ -53,7 +55,6 @@ class Profiler extends Events {
     }
 
     memorySnapshot() {
-        let ndx = 0;
         let memDump = '';
 		const delimiter = ']}';
 		return new Promise((resolve, reject) => {
@@ -65,7 +66,6 @@ class Profiler extends Events {
 					if (lastChars === delimiter) {
 						resolve(memDump);
 					}
-					this.lastChunkId = ndx++;
 				} else {
 					this.emit('inspector_method', ev );
 				}

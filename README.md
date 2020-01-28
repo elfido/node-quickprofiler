@@ -7,7 +7,7 @@ ready to be stored in a file or returned in a REST endpoint.
 
 Example:
 ```js
-const Profiler = require('./profiler');
+const Profiler = require('./profiler').Profiler;
 const fs = require('fs');
 
 const profiler = new Profiler();
@@ -15,6 +15,8 @@ const profiler = new Profiler();
 profiler.on('ready', _ => {
     console.log('profiler ready');
 });
+
+profiler.init();
 
 setTimeout(async () => {
 	try {
