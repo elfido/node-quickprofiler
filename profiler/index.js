@@ -1,13 +1,21 @@
-const inspector = require('inspector');
 const Events = require('events');
 
-const session = new inspector.Session();
-session.connect();
+let inspector = null;
+let session = null;
+
+function initialize() {
+	if (session == null) {
+		inspector = require('inspector');
+		session = new inspector.Session();
+		session.connect();
+	}
+}
 
 class Profiler extends Events {
     
     constructor() {
-        super();
+		super();
+		initialize();
         this.ready = false;
 	}
 	
